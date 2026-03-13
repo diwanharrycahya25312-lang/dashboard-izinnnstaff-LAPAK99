@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAPAK99 • COMMAND CENTER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #ff8c00;
+            --primary-dark: #e67e00;
+            --primary-light: #ffa64d;
+            --primary-glow: rgba(255, 140, 0, 0.5);
+            --danger: #ff4757;
+            --danger-glow: rgba(255, 71, 87, 0.5);
+            --success: #00d68f;
+            --success-glow: rgba(0, 214, 143, 0.5);
+            --warning: #ffaa00;
+            --warning-glow: rgba(255, 170, 0, 0.5);
+            --dark-bg: #0a0a0f;
+            --dark-card: rgba(18, 18, 26, 0.8);
+            --dark-border: rgba(255, 140, 0, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #6a6a7a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 140, 0, 0.15);
+        }
+
+        body {
+            background: var(--dark-bg);
+            min-height: 100vh;
+            padding: 24px;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 140, 0, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 60% 20%, rgba(255, 140, 0, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Grid Pattern Overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 140, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 140, 0, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dashboard {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Premium Header */
+        .header {
+            background: rgba(12, 12, 20, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 20px 32px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--primary), transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .brand {
+            position: relative;
+        }
+
+        .brand h1 {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+        }
+
+        .brand p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Premium DateTime Cards */
+        .datetime-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .date-card {
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.9), rgba(10, 10, 20, 0.95));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 24px;
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px -10px rgba(255, 215, 0, 0.3);
+        }
+
+        .date-card::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .date-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .date-day {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffd700;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .date-month-year {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .time-card {
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.9), rgba(10, 10, 20, 0.95));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 24px;
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px -10px rgba(255, 215, 0, 0.3);
+            min-width: 200px;
+        }
+
+        .time-card::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+            animation: rotate 15s linear infinite reverse;
+        }
+
+        .time-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-digital {
+            font-family: 'Orbitron', monospace;
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffd700;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            letter-spacing: 4px;
+        }
+
+        .time-period {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 4px;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Quick Panel Premium */
+        .quick-panel {
+            background: rgba(15, 15, 25, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 40px 48px;
+            margin-bottom: 32px;
+            box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--primary-light), var(--primary), transparent);
+            animation: scan 4s linear infinite;
+        }
+
+        .panel-title {
+            color: var(--text-primary);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .panel-title-glow {
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 6px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 30px var(--primary);
+            animation: glowPulse 2s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.8; transform: rotate(45deg) scale(1); }
+            50% { opacity: 1; transform: rotate(45deg) scale(1.2); box-shadow: 0 0 50px var(--primary); }
+        }
+
+        .quick-form {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1.5fr 1.5fr;
+            gap: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Premium Select Fields */
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-field {
+            width: 100%;
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 140, 0, 0.2);
+            border-radius: 28px;
+            padding: 22px 28px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff8c00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 24px center;
+            background-size: 20px;
+        }
+
+        .select-field:hover {
+            border-color: var(--primary);
+            background: rgba(30, 30, 40, 0.9);
+            box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.1);
+        }
+
+        .select-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.2);
+        }
+
+        .select-field option {
+            background: #1a1a24;
+            color: var(--text-primary);
+            padding: 16px;
+            font-size: 15px;
+        }
+
+        /* Premium Buttons */
+        .btn-quick {
+            border: none;
+            border-radius: 28px;
+            padding: 22px 32px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .btn-quick::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-quick:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-quick:hover {
+            transform: translateY(-4px);
+        }
+
+        .btn-quick:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            pointer-events: none;
+        }
+
+        .btn-quick:disabled::before {
+            display: none;
+        }
+
+        .btn-keluar {
+            background: linear-gradient(135deg, rgba(42, 26, 10, 0.9), rgba(58, 37, 16, 0.9));
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: 0 15px 30px -10px rgba(255, 140, 0, 0.5);
+        }
+
+        .btn-keluar:hover:not(:disabled) {
+            background: linear-gradient(135deg, rgba(58, 37, 16, 0.9), rgba(74, 48, 22, 0.9));
+            box-shadow: 0 25px 40px -10px var(--primary-glow);
+        }
+
+        .btn-kembali {
+            background: linear-gradient(135deg, rgba(10, 42, 26, 0.9), rgba(16, 58, 32, 0.9));
+            border: 2px solid var(--success);
+            color: var(--success);
+            box-shadow: 0 15px 30px -10px rgba(0, 214, 143, 0.5);
+        }
+
+        .btn-kembali:hover:not(:disabled) {
+            background: linear-gradient(135deg, rgba(16, 58, 32, 0.9), rgba(22, 74, 38, 0.9));
+            box-shadow: 0 25px 40px -10px var(--success-glow);
+        }
+
+        .status-message {
+            margin-top: 20px;
+            padding: 16px 24px;
+            background: rgba(255, 140, 0, 0.1);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            border-radius: 40px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: rgba(18, 18, 26, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 140, 0, 0.2), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(255, 140, 0, 0.4);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(30, 30, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover .stat-icon {
+            background: rgba(255, 140, 0, 0.15);
+            border-color: var(--primary);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .stat-info h3 {
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .stat-info .value {
+            color: var(--text-primary);
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(255, 140, 0, 0.4);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .stat-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 140, 0, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 12px;
+            color: var(--primary);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Active Section */
+        .active-section {
+            background: rgba(18, 18, 26, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 40px;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .section-header h2 {
+            color: var(--text-primary);
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(30, 30, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 40px;
+            padding: 12px 24px;
+        }
+
+        .live-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--danger);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--danger);
+            animation: livePulse 1.5s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        .active-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        /* Premium Timer Card */
+        .timer-card {
+            background: rgba(22, 22, 32, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            border-radius: 36px;
+            padding: 28px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .timer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .timer-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .timer-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 30px 50px -20px rgba(255, 140, 0, 0.5);
+        }
+
+        /* Late Card Premium Style */
+        .timer-card.late-card {
+            border: 2px solid var(--danger);
+            background: linear-gradient(145deg, rgba(40, 20, 20, 0.95), rgba(60, 20, 20, 0.9));
+            box-shadow: 0 0 40px var(--danger-glow), inset 0 0 40px rgba(255, 71, 87, 0.1);
+            animation: lateGlow 2s ease-in-out infinite;
+        }
+
+        .timer-card.late-card::after {
+            content: '⚠️ TERLAMBAT';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--danger), #ff6b81);
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 40px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 30px var(--danger);
+            animation: lateTextPulse 1.5s infinite;
+            z-index: 10;
+        }
+
+        @keyframes lateGlow {
+            0%, 100% { 
+                box-shadow: 0 0 40px var(--danger-glow), inset 0 0 40px rgba(255, 71, 87, 0.1);
+                border-color: var(--danger);
+            }
+            50% { 
+                box-shadow: 0 0 70px var(--danger-glow), inset 0 0 70px rgba(255, 71, 87, 0.2);
+                border-color: #ff6b81;
+            }
+        }
+
+        @keyframes lateTextPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.9; background: linear-gradient(135deg, #ff6b81, var(--danger)); }
+        }
+
+        /* Circular Progress */
+        .circular-progress {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .circular-progress svg {
+            width: 120px;
+            height: 120px;
+            transform: rotate(-90deg);
+        }
+
+        .progress-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.05);
+            stroke-width: 8;
+        }
+
+        .progress-fill {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 0.3s linear;
+            filter: drop-shadow(0 0 12px var(--primary-glow));
+        }
+
+        .progress-fill.late-fill {
+            stroke: var(--danger);
+            filter: drop-shadow(0 0 20px var(--danger-glow));
+            animation: progressLateGlow 1.5s infinite;
+        }
+
+        @keyframes progressLateGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px var(--danger-glow)); }
+            50% { filter: drop-shadow(0 0 40px var(--danger-glow)); }
+        }
+
+        .timer-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 28px;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .timer-value.late-value {
+            color: var(--danger);
+            text-shadow: 0 0 30px var(--danger-glow);
+            animation: valueLatePulse 1.5s infinite;
+            font-size: 24px;
+        }
+
+        @keyframes valueLatePulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        .timer-value small {
+            display: block;
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-top: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .timer-value.late-value small {
+            color: rgba(255, 200, 200, 0.8);
+        }
+
+        .timer-info {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timer-info h3 {
+            color: var(--text-primary);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .timer-info .job {
+            color: var(--primary);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(255, 140, 0, 0.12);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .timer-info .job.late-job {
+            background: rgba(255, 71, 87, 0.15);
+            border-color: rgba(255, 71, 87, 0.4);
+            color: #ff8a93;
+        }
+
+        .timer-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .timer-meta.late-meta {
+            color: rgba(255, 200, 200, 0.9);
+        }
+
+        .timer-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* History Section Premium */
+        .history-section {
+            background: rgba(18, 18, 26, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .history-header h2 {
+            color: var(--text-primary);
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .toggle-btn {
+            background: rgba(255, 140, 0, 0.12);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 40px;
+            padding: 10px 24px;
+            color: var(--primary);
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255, 140, 0, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+        }
+
+        .history-filters {
+            display: flex;
+            gap: 12px;
+            margin: 28px 0 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(30, 30, 40, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            border-radius: 40px;
+            padding: 10px 22px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(255, 140, 0, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.2);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th {
+            text-align: left;
+            padding: 18px 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 2px solid rgba(255, 140, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .history-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid rgba(255, 140, 0, 0.08);
+            color: var(--text-primary);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .history-row {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .history-row:hover td {
+            background: rgba(255, 140, 0, 0.08);
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .status-keluar {
+            background: rgba(255, 140, 0, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+        }
+
+        .status-kembali {
+            background: rgba(0, 214, 143, 0.12);
+            color: var(--success);
+            border: 1px solid rgba(0, 214, 143, 0.3);
+        }
+
+        .status-terlambat {
+            background: rgba(255, 71, 87, 0.12);
+            color: var(--danger);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            animation: statusLatePulse 2s infinite;
+        }
+
+        @keyframes statusLatePulse {
+            0%, 100% { box-shadow: 0 0 10px var(--danger-glow); }
+            50% { box-shadow: 0 0 25px var(--danger-glow); }
+        }
+
+        .duration-normal {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .duration-late {
+            font-weight: 600;
+            color: var(--danger);
+        }
+
+        /* Modal Premium */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(18, 18, 26, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 2px solid var(--primary);
+            border-radius: 48px;
+            padding: 48px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 40px 80px -20px rgba(255, 140, 0, 0.5);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(30px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid rgba(255, 140, 0, 0.2);
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            font-size: 32px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .modal-close {
+            background: rgba(255, 71, 87, 0.12);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 71, 87, 0.2);
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 0 30px var(--danger-glow);
+        }
+
+        .modal-item {
+            background: rgba(30, 30, 40, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            border-radius: 32px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+        }
+
+        .modal-item:hover {
+            border-color: var(--primary);
+            transform: translateX(8px);
+            background: rgba(255, 140, 0, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(255, 140, 0, 0.3);
+        }
+
+        .modal-item-info h4 {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .modal-item-info p {
+            color: var(--primary);
+            font-size: 15px;
+        }
+
+        .modal-item-time {
+            color: var(--text-secondary);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-item-badge {
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .modal-item-badge.keluar {
+            background: rgba(255, 140, 0, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+        }
+
+        .modal-item-badge.terlambat {
+            background: rgba(255, 71, 87, 0.12);
+            color: var(--danger);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            animation: badgeLatePulse 1.5s infinite;
+        }
+
+        @keyframes badgeLatePulse {
+            0%, 100% { box-shadow: 0 0 15px var(--danger-glow); }
+            50% { box-shadow: 0 0 30px var(--danger-glow); }
+        }
+
+        .modal-empty {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 32px;
+        }
+
+        /* Toast Premium */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: rgba(18, 18, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            padding: 20px 32px;
+            color: var(--text-primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 30px 50px -20px rgba(255, 140, 0, 0.6);
+            z-index: 9999;
+            animation: toastSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 16px;
+        }
+
+        @keyframes toastSlideIn {
+            from { transform: translateX(100%) translateY(20px); opacity: 0; }
+            to { transform: translateX(0) translateY(0); opacity: 1; }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 140, 0, 0.1);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 20, 30, 0.8);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 10px;
+            border: 2px solid rgba(20, 20, 30, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .quick-form {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .quick-form {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .active-grid {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .datetime-wrapper {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header Premium -->
+        <div class="header">
+            <div class="brand">
+                <h1>LAPAK99</h1>
+                <p>COMMAND CENTER</p>
+            </div>
+            <div class="datetime-wrapper">
+                <div class="date-card">
+                    <div class="date-content">
+                        <div class="date-day" id="currentDay">27</div>
+                        <div class="date-month-year" id="currentMonthYear">MARET 2024</div>
+                    </div>
+                </div>
+                <div class="time-card">
+                    <div class="time-content">
+                        <div class="time-digital" id="currentTime">22:15:30</div>
+                        <div class="time-period" id="currentPeriod">WIB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Panel -->
+        <div class="quick-panel">
+            <div class="panel-title">
+                <span class="panel-title-glow"></span> KONTROL IZIN STAFF
+            </div>
+            <div class="quick-form">
+                <select class="select-field" name="nama" id="selectNama" onchange="checkStaffStatus()">
+                    <option value="">🔍 PILIH NAMA STAFF</option>
+                </select>
+                
+                <select class="select-field" name="jobdesk" id="selectJobdesk" onchange="checkStaffStatus()">
+                    <option value="">🔍 PILIH JOBDESK</option>
+                    <option value="CS LINE UTAMA">CS LINE UTAMA</option>
+                    <option value="CS LINE BACKUP">CS LINE BACKUP</option>
+                    <option value="CS LIVECHAT">CS LIVECHAT</option>
+                    <option value="KAPTEN">KAPTEN</option>
+                    <option value="DEPO BCA">DEPO BCA</option>
+                    <option value="DEPO BRI">DEPO BRI</option>
+                    <option value="DEPO BNI">DEPO BNI</option>
+                    <option value="DEPO EWALLET">DEPO EWALLET</option>
+                    <option value="WITHDRAW">WITHDRAW</option>
+                    <option value="DEPO MANUAL">DEPO MANUAL</option>
+                    <option value="SCATTER VS EVERYBODY">SCATTER VS EVERYBODY</option>
+                </select>
+
+                <button class="btn-quick btn-keluar" id="btnKeluar" onclick="kirimDataKeSheet('Keluar')">
+                    <span>🚪</span> IZIN KELUAR
+                </button>
+
+                <button class="btn-quick btn-kembali" id="btnKembali" onclick="kirimDataKeSheet('Kembali')">
+                    <span>✅</span> KEMBALI
+                </button>
+            </div>
+            <div class="status-message" id="statusMessage">
+                ⚡ PILIH NAMA + JOBDESK
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card" id="keluarStat" onclick="showKeluarModal()">
+                <div class="stat-icon">🚪</div>
+                <div class="stat-info">
+                    <h3>SEDANG IZIN</h3>
+                    <div class="value" id="sedangIzin">0</div>
+                </div>
+                <div class="stat-badge" id="keluarBadge">Klik untuk lihat</div>
+            </div>
+            
+            <div class="stat-card" id="terlambatStat" onclick="showTerlambatModal()">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-info">
+                    <h3>TERLAMBAT</h3>
+                    <div class="value" id="totalTerlambat">0</div>
+                </div>
+                <div class="stat-badge" id="terlambatBadge">Klik untuk lihat</div>
+            </div>
+        </div>
+
+        <!-- Active Staff Section -->
+        <div class="active-section">
+            <div class="section-header">
+                <h2>
+                    <span>⏱️</span> STAFF SEDANG IZIN
+                </h2>
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    <span>LIVE • 16 MENIT</span>
+                </div>
+            </div>
+            <div class="active-grid" id="activeStaffGrid">
+                <!-- Akan diisi JavaScript -->
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-section" id="historySection">
+            <div class="history-header" onclick="toggleHistory()">
+                <h2>
+                    <span>📋</span> RIWAYAT AKTIVITAS
+                </h2>
+                <div class="history-info">
+                    <div class="toggle-btn">
+                        <span class="toggle-icon" id="toggleIcon">▼</span>
+                        <span id="toggleText">Sembunyikan</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="history-content" id="historyContent">
+                <div class="history-filters">
+                    <span class="filter-btn active" onclick="filterHistory('all')">Semua</span>
+                    <span class="filter-btn" onclick="filterHistory('Keluar')">Keluar</span>
+                    <span class="filter-btn" onclick="filterHistory('Kembali')">Kembali</span>
+                    <span class="filter-btn" onclick="filterHistory('Terlambat')">Terlambat</span>
+                </div>
+                
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>WAKTU</th>
+                            <th>STATUS</th>
+                            <th>NAMA</th>
+                            <th>JOBDESK</th>
+                            <th>DURASI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- Akan diisi JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>LAPAK99 • COMMAND CENTER • REAL-TIME MONITORING</p>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="keluarModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>
+                    <span>🚪</span> STAFF SEDANG IZIN
+                </h2>
+                <div class="modal-close" onclick="closeKeluarModal()">✕</div>
+            </div>
+            <div class="modal-list" id="keluarModalList">
+                <!-- Akan diisi JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="terlambatModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>
+                    <span>⚠️</span> STAFF TERLAMBAT
+                </h2>
+                <div class="modal-close" onclick="closeTerlambatModal()">✕</div>
+            </div>
+            <div class="modal-list" id="terlambatModalList">
+                <!-- Akan diisi JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer"></div>
+
+    <script>
+        // =============================================
+        // GOOGLE SHEETS INTEGRATION (TIDAK DIUBAH)
+        // =============================================
+        
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyvD5Ga-P2nq9xpEmajd9364oITDOL6t1DQi_my9MU15xYzKLBGyZx8X7eU8jMO5F1u/exec";
+        
+        // Data staff yang sedang izin (untuk timer)
+        let activeStaff = [];
+        let lateStaff = [];
+        
+        // Variabel untuk menyimpan pilihan terakhir
+        let lastSelectedNama = "";
+        let lastSelectedJobdesk = "";
+
+        // =============================================
+        // FUNGSI CEK STATUS STAFF (CEGAH DOUBLE)
+        // =============================================
+        
+        function checkStaffStatus() {
+            const namaSelect = document.getElementById('selectNama');
+            const btnKeluar = document.getElementById('btnKeluar');
+            const btnKembali = document.getElementById('btnKembali');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            const selectedNama = namaSelect ? namaSelect.value : "";
+            
+            if (!selectedNama) {
+                btnKeluar.disabled = false;
+                btnKembali.disabled = false;
+                statusMessage.innerHTML = "⚡ PILIH NAMA + JOBDESK";
+                statusMessage.style.background = "rgba(255, 140, 0, 0.1)";
+                return;
+            }
+            
+            const isActive = activeStaff.some(staff => staff.nama === selectedNama);
+            
+            if (isActive) {
+                btnKeluar.disabled = true;
+                btnKembali.disabled = false;
+                statusMessage.innerHTML = `⚠️ ${selectedNama} SEDANG IZIN • SILAKAN KLIK KEMBALI`;
+                statusMessage.style.background = "rgba(0, 214, 143, 0.15)";
+                statusMessage.style.borderColor = "rgba(0, 214, 143, 0.3)";
+            } else {
+                btnKeluar.disabled = false;
+                btnKembali.disabled = true;
+                statusMessage.innerHTML = `✅ ${selectedNama} TERSEDIA • SILAKAN IZIN KELUAR`;
+                statusMessage.style.background = "rgba(255, 140, 0, 0.1)";
+                statusMessage.style.borderColor = "rgba(255, 140, 0, 0.2)";
+            }
+        }
+
+        // =============================================
+        // FUNGSI UNTUK MODAL
+        // =============================================
+        
+        function showKeluarModal() {
+            const modal = document.getElementById('keluarModal');
+            const modalList = document.getElementById('keluarModalList');
+            
+            if (activeStaff.length === 0) {
+                modalList.innerHTML = '<div class="modal-empty">✨ TIDAK ADA STAFF SEDANG IZIN</div>';
+            } else {
+                let html = '';
+                activeStaff.forEach(staff => {
+                    const waktuKeluar = new Date(staff.waktuKeluar);
+                    const waktuStr = waktuKeluar.toLocaleTimeString('id-ID', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    const now = new Date();
+                    const elapsedMinutes = Math.floor((now - waktuKeluar) / 60000);
+                    const isLate = elapsedMinutes > 16;
+                    
+                    html += `
+                        <div class="modal-item">
+                            <div class="modal-item-info">
+                                <h4>${staff.nama}</h4>
+                                <p>${staff.jobdesk}</p>
+                            </div>
+                            <div class="modal-item-time">
+                                <span>🕒 ${waktuStr}</span>
+                                <span class="modal-item-badge ${isLate ? 'terlambat' : 'keluar'}">
+                                    ${isLate ? `Terlambat ${elapsedMinutes - 16} menit` : `Izin ke-${staff.izinKe || 1}`}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                });
+                modalList.innerHTML = html;
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeKeluarModal() {
+            document.getElementById('keluarModal').classList.remove('active');
+        }
+
+        function showTerlambatModal() {
+            const modal = document.getElementById('terlambatModal');
+            const modalList = document.getElementById('terlambatModalList');
+            
+            const now = new Date();
+            lateStaff = activeStaff.filter(staff => {
+                const keluarTime = new Date(staff.waktuKeluar);
+                const elapsedMinutes = Math.floor((now - keluarTime) / 60000);
+                return elapsedMinutes > 16;
+            });
+            
+            if (lateStaff.length === 0) {
+                modalList.innerHTML = '<div class="modal-empty">✅ TIDAK ADA STAFF TERLAMBAT</div>';
+            } else {
+                let html = '';
+                lateStaff.forEach(staff => {
+                    const waktuKeluar = new Date(staff.waktuKeluar);
+                    const elapsedMinutes = Math.floor((now - waktuKeluar) / 60000);
+                    const terlambatMenit = elapsedMinutes - 16;
+                    
+                    html += `
+                        <div class="modal-item">
+                            <div class="modal-item-info">
+                                <h4>${staff.nama}</h4>
+                                <p>${staff.jobdesk}</p>
+                            </div>
+                            <div>
+                                <span class="modal-item-badge terlambat">Terlambat ${terlambatMenit} menit</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                modalList.innerHTML = html;
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeTerlambatModal() {
+            document.getElementById('terlambatModal').classList.remove('active');
+        }
+
+        window.addEventListener('click', function(event) {
+            const keluarModal = document.getElementById('keluarModal');
+            const terlambatModal = document.getElementById('terlambatModal');
+            
+            if (event.target === keluarModal) {
+                keluarModal.classList.remove('active');
+            }
+            if (event.target === terlambatModal) {
+                terlambatModal.classList.remove('active');
+            }
+        });
+
+        // =============================================
+        // FUNGSI UNTUK PREMIUM DATE & TIME
+        // =============================================
+        
+        function updatePremiumDateTime() {
+            const now = new Date();
+            
+            const day = now.getDate();
+            const month = now.toLocaleDateString('id-ID', { month: 'long' }).toUpperCase();
+            const year = now.getFullYear();
+            
+            document.getElementById('currentDay').textContent = day;
+            document.getElementById('currentMonthYear').textContent = `${month} ${year}`;
+            
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            
+            const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('currentTime').textContent = timeString;
+            document.getElementById('currentPeriod').textContent = 'WIB';
+        }
+
+        setInterval(updatePremiumDateTime, 1000);
+
+        // =============================================
+        // FUNGSI UNTUK RESET HISTORY OTOMATIS (48 JAM)
+        // =============================================
+        
+        function checkHistoryReset() {
+            const lastReset = localStorage.getItem('lastHistoryReset');
+            const now = new Date().getTime();
+            const fortyEightHours = 48 * 60 * 60 * 1000;
+            
+            if (lastReset) {
+                const timeSinceReset = now - parseInt(lastReset);
+                
+                if (timeSinceReset >= fortyEightHours) {
+                    historyLog = [];
+                    localStorage.setItem('lapak99_history', JSON.stringify(historyLog));
+                    localStorage.setItem('lastHistoryReset', now.toString());
+                    updateHistory();
+                }
+            } else {
+                localStorage.setItem('lastHistoryReset', now.toString());
+            }
+        }
+
+        setInterval(checkHistoryReset, 60000);
+
+        // =============================================
+        // FUNGSI UNTUK TOGGLE HISTORY
+        // =============================================
+        
+        function toggleHistory() {
+            const section = document.getElementById('historySection');
+            const icon = document.getElementById('toggleIcon');
+            const text = document.getElementById('toggleText');
+            
+            section.classList.toggle('collapsed');
+            
+            if (section.classList.contains('collapsed')) {
+                icon.innerHTML = '▶';
+                text.innerHTML = 'Tampilkan';
+            } else {
+                icon.innerHTML = '▼';
+                text.innerHTML = 'Sembunyikan';
+            }
+        }
+
+        // =============================================
+        // FUNGSI UTAMA KIRIM DATA (TIDAK DIUBAH)
+        // =============================================
+        
+        function kirimDataKeSheet(statusIzin) {
+            const namaSelect = document.querySelector('select[name="nama"]');
+            const jobdeskSelect = document.querySelector('select[name="jobdesk"]');
+            
+            const nama = namaSelect ? namaSelect.value : "";
+            const jobdesk = jobdeskSelect ? jobdeskSelect.value : "";
+            
+            if (!nama || !jobdesk || nama === "" || jobdesk === "") {
+                alert('⚠️ PILIH NAMA DAN JOBDESK TERLEBIH DAHULU!');
+                return;
+            }
+
+            if (statusIzin === 'Keluar') {
+                const isAlreadyActive = activeStaff.some(staff => staff.nama === nama);
+                if (isAlreadyActive) {
+                    alert(`⚠️ ${nama} SEDANG IZIN KELUAR! TIDAK BISA IZIN GANDA.`);
+                    return;
+                }
+            }
+
+            if (statusIzin === 'Kembali') {
+                const isActive = activeStaff.some(staff => staff.nama === nama);
+                if (!isActive) {
+                    alert(`⚠️ ${nama} TIDAK SEDANG IZIN KELUAR!`);
+                    return;
+                }
+            }
+            
+            const payload = {
+                nama: nama,
+                jobdesk: jobdesk,
+                status: statusIzin
+            };
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<span>⏳</span><span>MENGIRIM DATA...</span>`;
+            document.getElementById('toastContainer').appendChild(toast);
+
+            fetch(WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                toast.remove();
+                
+                if (statusIzin === 'Keluar') {
+                    const waktuKeluar = new Date();
+                    const izinKe = activeStaff.filter(s => s.nama === nama).length + 1;
+                    
+                    activeStaff.push({
+                        nama: nama,
+                        jobdesk: jobdesk,
+                        waktuKeluar: waktuKeluar,
+                        izinKe: izinKe
+                    });
+                    
+                    showToast(`✅ ${nama} IZIN KELUAR`, 'success');
+                    addToHistory('Keluar', nama, jobdesk);
+                    
+                } else if (statusIzin === 'Kembali') {
+                    const staffKeluar = activeStaff.find(s => s.nama === nama);
+                    if (staffKeluar) {
+                        const waktuKeluar = new Date(staffKeluar.waktuKeluar);
+                        const waktuKembali = new Date();
+                        const durasiMenit = Math.floor((waktuKembali - waktuKeluar) / 60000);
+                        const durasiDetik = Math.floor(((waktuKembali - waktuKeluar) % 60000) / 1000);
+                        
+                        const durasiText = `${durasiMenit} menit ${durasiDetik} detik`;
+                        const isLate = durasiMenit > 16;
+                        
+                        showToast(`✅ ${nama} KEMBALI • Durasi: ${durasiText}`, 'success');
+                        addToHistory(isLate ? 'Terlambat' : 'Kembali', nama, jobdesk, durasiText);
+                    }
+                    
+                    activeStaff = activeStaff.filter(s => s.nama !== nama);
+                }
+                
+                updateActiveStaffTimers();
+                checkStaffStatus();
+                
+                lastSelectedNama = nama;
+                lastSelectedJobdesk = jobdesk;
+            })
+            .catch(err => {
+                console.error("❌ Gagal:", err);
+                toast.remove();
+                showToast(`❌ Gagal mengirim data: ${err.message}`, 'error');
+            });
+        }
+
+        // =============================================
+        // FUNGSI UPDATE TIMER
+        // =============================================
+        
+        function updateActiveStaffTimers() {
+            const activeGrid = document.getElementById('activeStaffGrid');
+            if (!activeGrid) return;
+            
+            if (activeStaff.length === 0) {
+                activeGrid.innerHTML = '<div style="color:#6a6a7a; text-align:center; padding:80px; background:rgba(255,255,255,0.02); border-radius:36px; backdrop-filter:blur(10px); grid-column:span 2; font-size:20px; font-weight:500;">⚡ TIDAK ADA STAFF SEDANG IZIN ⚡</div>';
+                return;
+            }
+
+            let html = '';
+            const now = new Date();
+            let totalTerlambat = 0;
+            
+            activeStaff.forEach((staff) => {
+                const waktuKeluar = new Date(staff.waktuKeluar);
+                const elapsedSeconds = Math.floor((now - waktuKeluar) / 1000);
+                const totalSeconds = 16 * 60;
+                const remainingSeconds = Math.max(0, totalSeconds - elapsedSeconds);
+                
+                const minutes = Math.floor(remainingSeconds / 60);
+                const seconds = remainingSeconds % 60;
+                const progress = Math.min(283, (elapsedSeconds / totalSeconds) * 283);
+                const isLate = elapsedSeconds > totalSeconds;
+                
+                if (isLate) totalTerlambat++;
+                
+                const waktuKeluarStr = waktuKeluar.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                const elapsedMinutes = Math.floor(elapsedSeconds / 60);
+                const terlambatMenit = elapsedMinutes - 16;
+
+                const cardClass = isLate ? 'timer-card late-card' : 'timer-card';
+                const progressClass = isLate ? 'progress-fill late-fill' : 'progress-fill';
+                const valueClass = isLate ? 'timer-value late-value' : 'timer-value';
+                const jobClass = isLate ? 'job late-job' : 'job';
+                const metaClass = isLate ? 'timer-meta late-meta' : 'timer-meta';
+
+                let timerDisplay = '';
+                if (isLate) {
+                    timerDisplay = `+${terlambatMenit}'`;
+                } else {
+                    timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }
+
+                html += `
+                    <div class="${cardClass}" onclick="showStaffDetail('${staff.nama}')">
+                        <div class="circular-progress">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="${progressClass}" 
+                                        cx="50" cy="50" r="45"
+                                        style="stroke-dashoffset: ${progress}; stroke-dasharray: 283;"></circle>
+                            </svg>
+                            <div class="${valueClass}">
+                                ${timerDisplay}
+                                <small>${isLate ? 'terlambat' : 'tersisa'}</small>
+                            </div>
+                        </div>
+                        <div class="timer-info">
+                            <h3>${staff.nama}</h3>
+                            <span class="${jobClass}">${staff.jobdesk}</span>
+                            <div class="${metaClass}">
+                                <span>⏱️ Izin ke-${staff.izinKe || 1}</span>
+                                <span>🕒 ${waktuKeluarStr}</span>
+                                ${isLate ? `<span>⚠️ +${terlambatMenit} menit</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            activeGrid.innerHTML = html;
+            
+            document.getElementById('sedangIzin').textContent = activeStaff.length;
+            document.getElementById('totalTerlambat').textContent = totalTerlambat;
+            
+            document.getElementById('keluarBadge').textContent = 
+                activeStaff.length > 0 ? `${activeStaff.length} staff` : 'Klik untuk lihat';
+            document.getElementById('terlambatBadge').textContent = 
+                totalTerlambat > 0 ? `${totalTerlambat} staff` : 'Klik untuk lihat';
+        }
+
+        function showStaffDetail(nama) {
+            showToast(`📋 Detail staff: ${nama}`, 'info');
+        }
+
+        setInterval(updateActiveStaffTimers, 1000);
+
+        // =============================================
+        // FUNGSI TOAST
+        // =============================================
+        
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <span>${type === 'success' ? '✅' : type === 'info' ? 'ℹ️' : '❌'}</span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // =============================================
+        // DATA STAFF (TIDAK DIUBAH)
+        // =============================================
+        
+        const namaStaff = [
+            "ESAFAT ALAN TELAUMBANU", "ROY ANDREW NADEAK", "EDWIN PRANATA",
+            "FALLEN HARDINANSAH TAJU", "VERI SUSANTO", "DIWAN HARRY CAHYA",
+            "KRISHNA", "SAFNALI MUSTAQIM CHANIAGO", "BILLY GUNAWAN",
+            "FIRMAN ARDYANSYAH", "AGUS TEDDY WISONO", "AHMAD HABIBI KHANI",
+            "RIKI ANDIKA NAINGGOLAN", "HARIANTO", "MILLIARTO VIKTOR",
+            "RAM KIRAN", "DANDY MUANMAR", "RUDI IRAWAN",
+            "GILANG PRAMANA", "ZULKIFLI EVANDA NASUTION", "FAISAL IDUL ANWAR TELAUMBANUA",
+            "LAELA ANASILDA", "ANDI", "DESSYA SHAFIRA AL HAFNI",
+            "YUSUF", "SURIYA PRAKAS", "GILBERT",
+            "YODY SEBASTIAN", "MUHAMMAD RAFI LUBIS", "RIDHO SETIAWAN",
+            "RAMADHAN AULANA FEBRIANTO", "MUHAMMAD RIKO", "RAIHAN SAPUTRA",
+            "MUHAMMAD HAIKAL AULIA"
+        ];
+
+        const jobdeskList = [
+            "CS LINE UTAMA", "CS LINE BACKUP", "CS LIVECHAT", "KAPTEN",
+            "DEPO BCA", "DEPO BRI", "DEPO BNI", "DEPO EWALLET",
+            "WITHDRAW", "DEPO MANUAL", "SCATTER VS EVERYBODY"
+        ];
+
+        let staffData = [];
+        for (let i = 0; i < namaStaff.length; i++) {
+            const jobIndex = i % jobdeskList.length;
+            staffData.push({
+                no: i + 1,
+                nama: namaStaff[i],
+                jobdesk: jobdeskList[jobIndex],
+                izinKe: 0,
+                durasi: 0,
+                status: "",
+                waktuKeluar: null,
+                waktuKembali: null
+            });
+        }
+
+        let historyLog = [];
+        let currentFilter = 'all';
+
+        function loadLocalHistory() {
+            const saved = localStorage.getItem('lapak99_history');
+            if (saved) {
+                try {
+                    historyLog = JSON.parse(saved);
+                    updateHistory();
+                } catch (e) {
+                    console.log('Error loading history');
+                }
+            }
+        }
+
+        function saveLocalHistory() {
+            localStorage.setItem('lapak99_history', JSON.stringify(historyLog));
+        }
+
+        function restoreLastSelection() {
+            const selectNama = document.querySelector('select[name="nama"]');
+            const selectJobdesk = document.querySelector('select[name="jobdesk"]');
+            
+            const savedNama = localStorage.getItem('lastSelectedNama');
+            const savedJobdesk = localStorage.getItem('lastSelectedJobdesk');
+            
+            if (savedNama && selectNama) {
+                const optionExists = Array.from(selectNama.options).some(opt => opt.value === savedNama);
+                if (optionExists) {
+                    selectNama.value = savedNama;
+                    lastSelectedNama = savedNama;
+                }
+            }
+            
+            if (savedJobdesk && selectJobdesk) {
+                const optionExists = Array.from(selectJobdesk.options).some(opt => opt.value === savedJobdesk);
+                if (optionExists) {
+                    selectJobdesk.value = savedJobdesk;
+                    lastSelectedJobdesk = savedJobdesk;
+                }
+            }
+        }
+
+        function initSelects() {
+            const selectNama = document.querySelector('select[name="nama"]');
+            if (!selectNama) return;
+            
+            selectNama.innerHTML = '<option value="">🔍 PILIH NAMA STAFF</option>';
+            
+            staffData.forEach(staff => {
+                const option = document.createElement('option');
+                option.value = staff.nama;
+                option.textContent = staff.nama;
+                selectNama.appendChild(option);
+            });
+            
+            restoreLastSelection();
+            checkStaffStatus();
+        }
+
+        function saveSelectionToStorage() {
+            const selectNama = document.querySelector('select[name="nama"]');
+            const selectJobdesk = document.querySelector('select[name="jobdesk"]');
+            
+            if (selectNama && selectNama.value) {
+                localStorage.setItem('lastSelectedNama', selectNama.value);
+            }
+            if (selectJobdesk && selectJobdesk.value) {
+                localStorage.setItem('lastSelectedJobdesk', selectJobdesk.value);
+            }
+        }
+
+        function addToHistory(action, nama, jobdesk, duration = '-') {
+            const time = new Date().toLocaleTimeString('id-ID', { 
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+            const date = new Date().toLocaleDateString('id-ID', {
+                day: '2-digit', month: '2-digit'
+            });
+
+            historyLog.unshift({
+                time: `${date} ${time}`,
+                action: action,
+                nama: nama,
+                jobdesk: jobdesk,
+                duration: duration
+            });
+            
+            if (historyLog.length > 50) historyLog.pop();
+            saveLocalHistory();
+            updateHistory();
+        }
+
+        function updateHistory() {
+            const historyBody = document.getElementById('historyBody');
+            if (!historyBody) return;
+            
+            let filteredLog = historyLog.filter(item => currentFilter === 'all' || item.action === currentFilter);
+
+            let html = '';
+            filteredLog.forEach(item => {
+                const statusClass = item.action === 'Keluar' ? 'status-keluar' : 
+                                  item.action === 'Kembali' ? 'status-kembali' : 'status-terlambat';
+                const durationClass = item.action === 'Terlambat' ? 'duration-late' : 'duration-normal';
+
+                html += `
+                    <tr class="history-row">
+                        <td>${item.time}</td>
+                        <td><span class="status-badge ${statusClass}">${item.action}</span></td>
+                        <td>${item.nama}</td>
+                        <td>${item.jobdesk}</td>
+                        <td><span class="${durationClass}">${item.duration}</span></td>
+                    </tr>
+                `;
+            });
+
+            historyBody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; padding:60px; color:#6a6a7a; background:rgba(255,255,255,0.02); border-radius:28px; font-size:18px;">⚡ BELUM ADA AKTIVITAS ⚡</td></tr>';
+        }
+
+        function filterHistory(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateHistory();
+        }
+
+        window.addEventListener('load', function() {
+            loadLocalHistory();
+            initSelects();
+            updateActiveStaffTimers();
+            updatePremiumDateTime();
+            checkHistoryReset();
+            
+            const selectNama = document.querySelector('select[name="nama"]');
+            const selectJobdesk = document.querySelector('select[name="jobdesk"]');
+            
+            if (selectNama) {
+                selectNama.addEventListener('change', function() {
+                    saveSelectionToStorage();
+                    checkStaffStatus();
+                });
+            }
+            if (selectJobdesk) {
+                selectJobdesk.addEventListener('change', saveSelectionToStorage);
+            }
+        });
+    </script>
+</body>
+</html>
