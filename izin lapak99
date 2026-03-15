@@ -1402,7 +1402,7 @@
         // GOOGLE SHEETS INTEGRATION (TIDAK DIUBAH)
         // =============================================
         
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyvD5Ga-P2nq9xpEmajd9364oITDOL6t1DQi_my9MU15xYzKLBGyZx8X7eU8jMO5F1u/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzjdAOQmqv8jmpKfvue0avY0cc89uTmY4G8VjNcvt-5dZWqGsV8viZXsITDhq5nvymn/exec";
         
         // Data staff yang sedang izin (untuk timer)
         let activeStaff = [];
