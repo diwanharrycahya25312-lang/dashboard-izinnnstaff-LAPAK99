@@ -1299,7 +1299,7 @@
             <div class="stat-card" id="terlambatStat" onclick="showTerlambatModal()">
                 <div class="stat-icon">⚠️</div>
                 <div class="stat-info">
-                    <h3>TERLAMBAT</h3>
+                    <h3>KOK TERLAMBAT</h3>
                     <div class="value" id="totalTerlambat">0</div>
                 </div>
                 <div class="stat-badge" id="terlambatBadge">Klik untuk lihat</div>
